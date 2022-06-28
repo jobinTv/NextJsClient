@@ -1,3 +1,80 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb",
+        "prettier",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": ["off",
+            {
+                 "singleQuote": true
+            }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+               "namedComponents": ["arrow-function" , "function-declaration"],
+               "unnamedComponents": "arrow-function"
+            }
+        ],
+        "no-console":["error", {"allow": ["warn", "error", "info"]}],
+        "arrow-body-style":"off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".tsx"
+                ]
+            }
+        ],
+        "linebreak-style": ["error","unix"],
+        "import/prefer-default-export":"off",
+        "no-unused-vars": "error",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "react/require-default-props":"off",
+        "react/destructuring-assignment":"off",
+        "react/prop-types":"off"
+    },
+    "globals": {
+         "JSX": true
+    }
 }
