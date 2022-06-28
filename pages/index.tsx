@@ -1,14 +1,8 @@
-import { gql } from '@apollo/client';
 import { List } from 'antd';
 import styles from '../styles/Home.module.css';
 import { client } from '../src/apollo';
-
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
+import { User } from '../types/generated';
+import { getAllUsers } from '../src/gql-query/query.graphql';
 
 interface Props {
   data: User[];
@@ -29,17 +23,6 @@ const Home = (props: Props) => {
 
 export default Home;
 
-const getAllUsers = gql`
-  {
-    getAllUsers {
-      id
-      name
-      username
-      email
-    }
-  }
-`;
-
 // export const getStaticProps = async () => {
 //   const { data } = await client.query({
 //     query: getAllUsers,
@@ -57,10 +40,9 @@ export const getServerSideProps = async () => {
   const { data } = await client.query({
     query: getAllUsers,
   });
-
   return {
     props: {
-      data: data?.getAllUsers,
+      data: data?.users,
     },
   };
 };
