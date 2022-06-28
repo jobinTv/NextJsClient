@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { List } from 'antd';
 import styles from '../styles/Home.module.css';
 import { client } from '../src/apollo';
 
@@ -17,11 +18,11 @@ const Home = (props: Props) => {
   const { data } = props;
   return (
     <div className={styles.container}>
-      <ul>
-        {data?.map((item: User) => {
-          return <li key={item.id}>{item.name}</li>;
-        })}
-      </ul>
+      <h1>Users</h1>
+      <List
+        dataSource={data}
+        renderItem={(item) => <List.Item>{item.username}</List.Item>}
+      />
     </div>
   );
 };
@@ -39,20 +40,7 @@ const getAllUsers = gql`
   }
 `;
 
-export const getStaticProps = async () => {
-  const { data } = await client.query({
-    query: getAllUsers,
-  });
-
-  return {
-    props: {
-      data: data?.getAllUsers,
-    },
-    revalidate: 10,
-  };
-};
-
-// export const getServerSideProps = async () => {
+// export const getStaticProps = async () => {
 //   const { data } = await client.query({
 //     query: getAllUsers,
 //   });
@@ -61,5 +49,18 @@ export const getStaticProps = async () => {
 //     props: {
 //       data: data?.getAllUsers,
 //     },
+//     revalidate: 10,
 //   };
 // };
+
+export const getServerSideProps = async () => {
+  const { data } = await client.query({
+    query: getAllUsers,
+  });
+
+  return {
+    props: {
+      data: data?.getAllUsers,
+    },
+  };
+};
