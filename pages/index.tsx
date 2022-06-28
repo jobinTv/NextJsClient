@@ -39,7 +39,19 @@ const getAllUsers = gql`
   }
 `;
 
-export async function getServerSideProps() {
+// export const getServerSideProps = async () => {
+//   const { data } = await client.query({
+//     query: getAllUsers,
+//   });
+
+//   return {
+//     props: {
+//       data: data?.getAllUsers,
+//     },
+//   };
+// };
+
+export const getStaticProps = async () => {
   const { data } = await client.query({
     query: getAllUsers,
   });
@@ -48,5 +60,6 @@ export async function getServerSideProps() {
     props: {
       data: data?.getAllUsers,
     },
+    revalidate: 10,
   };
-}
+};
