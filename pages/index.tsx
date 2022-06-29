@@ -1,4 +1,5 @@
 import { List } from 'antd';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { client } from '../src/apollo';
 import { User } from '../types/generated';
@@ -10,12 +11,17 @@ interface Props {
 
 const Home = (props: Props) => {
   const { data } = props;
+
   return (
     <div className={styles.container}>
       <h1>Users</h1>
       <List
         dataSource={data}
-        renderItem={(item) => <List.Item>{item.username}</List.Item>}
+        renderItem={(item) => (
+          <List.Item>
+            <Link href={`/${item.username}`}>{item.username}</Link>
+          </List.Item>
+        )}
       />
     </div>
   );
