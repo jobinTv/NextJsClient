@@ -14,7 +14,7 @@ const Home = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <h1>Users</h1>
+      <h1 id="header">Users</h1>
       <List
         dataSource={data}
         renderItem={(item) => (
